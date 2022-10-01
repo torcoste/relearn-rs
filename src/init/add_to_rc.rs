@@ -1,7 +1,7 @@
 use std::process::Command;
 
 fn add_to_terminal_startup(rc_file_path: &str) {
-    let startup_command = "if [ -x \"$(command -v rlrn)\" ]; then rlrn learn fi";
+    let startup_command = "if [ -x \"$(command -v rlrn)\" ]; then\n  rlrn learn\nfi\n";
 
     // check if command is already in rc file
     let output = Command::new("sh")
@@ -30,7 +30,7 @@ fn add_to_terminal_startup(rc_file_path: &str) {
 fn _remove_from_terminal_startup(rc_file_name: &str) {
     Command::new("sh")
         .arg("-c")
-        .arg(format!("sed -i \"/\\brlrn\\b/d\" ~/{} ", rc_file_name))
+        .arg(format!("sed -i '/command -v rlrn/,+2d' ~/{} ", rc_file_name))
         .output()
         .unwrap_or_else(|_| panic!("Failed to remove from terminal startup script ({})",
                 rc_file_name));
