@@ -27,6 +27,8 @@ enum Commands {
 fn main() {
     let cli = Cli::parse();
 
+    // TODO: if it is a first run, run init command automatically before any other command
+
     match &cli.command {
         Some(Commands::Init {}) => {
             init_command_handler();
