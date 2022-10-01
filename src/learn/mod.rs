@@ -1,3 +1,6 @@
+use std::borrow::Borrow;
+use std::clone;
+
 use cursive::align::HAlign;
 use cursive::event::EventResult;
 use cursive::traits::*;
@@ -14,12 +17,6 @@ struct Question {
 }
 
 pub fn learn_command_handler(_force: bool) {
-    let mut select = SelectView::new()
-        // Center the text horizontally
-        .h_align(HAlign::Center)
-        // Use keyboard to jump to the pressed letters
-        .autojump();
-
     // Let's override the `j` and `k` keys for navigation
     let mut siv = cursive::default();
     // Read the list of cities from separate file, and fill the view with it.
@@ -29,30 +26,32 @@ pub fn learn_command_handler(_force: bool) {
 
     let num = rand::thread_rng().gen_range(0..questions.len());
     let question = questions[num].clone();
-    select.add_all_str(question.answers.clone());
-    // Sets the callback for when "Enter" is pressed.
-    select.set_on_submit(move |s, item: &str| {
-        if item == question.correct_answer {
-            s.pop_layer();
-            s.add_layer(Dialog::around(TextView::new("Correct!")).button("Quit", |s| s.quit()));
-        } else {
-            s.add_layer(Dialog::info("Wrong!"));
-        }
-    });
+    let mut siv = cursive::default();
 
-    let select = OnEventView::new(select)
-        .on_pre_event_inner('k', |s, _| {
-            let cb = s.select_up(1);
-            Some(EventResult::Consumed(Some(cb)))
-        })
-        .on_pre_event_inner('j', |s, _| {
-            let cb = s.select_down(1);
-            Some(EventResult::Consumed(Some(cb)))
+    // Creates a dialog with a single "Quit" button
+    let table_view = TextView::new(&question.question).h_align(HAlign::Left);
+    let mut dialog = Dialog::around(table_view).title("RLRN");
+
+    // add buttons
+    for answer in &question.answers {
+        let answer = answer.clone();
+        let question = question.clone();
+
+        dialog = dialog.button(answer.clone(), move |s| {
+            if answer.clone() == question.correct_answer {
+                s.add_layer(
+                    Dialog::info("Correct!")
+                        .dismiss_button("Next")
+                        .button("Quit", |s| s.quit()),
+                );
+            } else {
+                s.add_layer(Dialog::info("Wrong!"));
+            }
         });
+    }
 
-    siv.add_layer(
-        Dialog::around(select.scrollable().fixed_size((20, 10))).title(question.question),
-    );
+    siv.add_layer(dialog);
 
+    // Starts the event loop.
     siv.run();
 }

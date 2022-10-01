@@ -1,11 +1,41 @@
 [{
-        "question": "What is the favorite color?",
-        "correct_answer": "Blue",
-        "answers": ["Red", "Blue", "Green"]
+        "question": "macro_rules! x {\n    ($n:expr) => {\n        let a = X($n);\n    };\n}\n\nstruct X(u64);\n\nimpl Drop for X {\n    fn drop(&mut self) {\n        print!(\"{}\", self.0);\n    }\n}\n\nfn main() {\n    let a = X(1);\n    x!(2);\n    print!(\"{}\", a.0);\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 112"]
     },
     {
-        "question": "What is the capital of England?",
-        "correct_answer": "London",
-        "answers": ["Paris", "London", "Berlin", "Madrid"]
+        "question": "macro_rules! m {\n    ($($s:stmt)*) => {\n        $(\n            { stringify!($s); 1 }\n        )<<*\n    };\n}\n\nfn main() {\n    print!(\n        \"{}{}{}\",\n        m! { return || true },\n        m! { (return) || true },\n        m! { {return} || true },\n    );\n}\n",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 112"]
+    },
+    {
+        "question": "struct S(i32);\n\nimpl std::ops::BitAnd<S> for () {\n    type Output = ();\n\n    fn bitand(self, rhs: S) {\n        print!(\"{}\", rhs.0);\n    }\n}\n\nfn main() {\n    let f = || ( () & S(1) );\n    let g = || { () & S(2) };\n    let h = || ( {} & S(3) );\n    let i = || { {} & S(4) };\n    f();\n    g();\n    h();\n    i();\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+    },
+    {
+        "question": "struct S {\n    x: i32,\n}\n\nconst S: S = S { x: 2 };\n\nfn main() {\n    let v = &mut S;\n    v.x += 1;\n    S.x += 1;\n    print!(\"{}{}\", v.x, S.x);\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+    },
+    {
+        "question": "fn main() {\n    let (.., x, y) = (0, 1, ..);\n    print!(\"{}\", b\"066\"[y][x]);\n}\n",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+    },
+    {
+        "question": "trait Trait {\n    fn p(self);\n}\n\nimpl<T> Trait for fn(T) {\n    fn p(self) {\n        print!(\"1\");\n    }\n}\n\nimpl<T> Trait for fn(&T) {\n    fn p(self) {\n        print!(\"2\");\n    }\n}\n\nfn f(_: u8) {}\nfn g(_: &u8) {}\n\nfn main() {\n    let a: fn(_) = f;\n    let b: fn(_) = g;\n    let c: fn(&_) = g;\n    a.p();\n    b.p();\n    c.p();\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+    },
+    {
+        "question": "use std::mem;\n\nfn main() {\n    let a;\n    let a = a = true;\n    print!(\"{}\", mem::size_of_val(&a));\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+    },
+    {
+        "question": "#[repr(u8)]\nenum Enum {\n    First,\n    Second,\n}\n\nimpl Enum {\n    fn p(self) {\n        match self {\n            First => print!(\"1\"),\n            Second => print!(\"2\"),\n        }\n    }\n}\n\nfn main() {\n    Enum::p(unsafe {\n        std::mem::transmute(1u8)\n    });\n}",
+        "correct_answer": "The program exhibits undefined behavior",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
     }
 ]
