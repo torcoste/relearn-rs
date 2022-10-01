@@ -560,7 +560,7 @@
 			"Both are character literals.",
 			"heart_eyed_cat is an invalid expression.",
 			"c is a string literal and heart_eyed_cat is a character literal.",
-			"fBoth are string literals."
+			"Both are string literals."
 		],
 		"point_reward": 5,
 		"tags": [
