@@ -1,0 +1,11 @@
+[{
+        "question": "What is the favorite color?",
+        "correct_answer": "Blue",
+        "answers": ["Red", "Blue", "Green"]
+    },
+    {
+        "question": "What is the capital of England?",
+        "correct_answer": "London",
+        "answers": ["Paris", "London", "Berlin", "Madrid"]
+    }
+]
