@@ -44,11 +44,14 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-TBD
+ReLeaRN or `rlrn` is a CLI tool, allowing Rustaceans to learn, improve and maintain their Rust skills!
+`rlrn` uses simple quizzes combined with a **Spaced Repitition** engine to help you find and overcome with Rust weakspots and improve your software engineering skills.
+
+`rlrn` gamifies learning Rust and brings your friends and colleagues together in your daily learning, with badges (as NFTs), progress bars, leaderboards (both public and company/clan).
 
 ### Built With
 
-TBD
+ReLeaRN is built with Rust end-to-end, and uses Open Source Rust libraries to create an interface to the engine.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -73,12 +76,14 @@ TBD
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-TBD
+```sh
+rlrn
+```
 
 <!-- ROADMAP -->
 ## Roadmap
 
-TBD
+`rlrn` can be used as engine with any kind of learning, including non-programming topics such medical exams, driving exams and tests etc.
 
 See the [open issues](https://github.com/torcoste/relearn-rs/issues) for a list of proposed features (and known issues).
 
