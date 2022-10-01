@@ -2,15 +2,7 @@
 name = "rlrn"
 version = "0.1.0"
 description = "CLI tool for learning Rust effectively"
-keywords = [
-    "rust",
-    "cli",
-    "learning",
-    "SRS",
-    "spaced repetition",
-    "quiz",
-    "flashcards",
-]
+keywords = ["cli", "learning", "SRS", "spaced-repetition", "quiz"]
 edition = "2021"
 license = "MIT"
 repository = "https://github.com/torcoste/relearn-rs"
