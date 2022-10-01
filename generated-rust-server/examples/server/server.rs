@@ -7,7 +7,7 @@ use futures::{future, Stream, StreamExt, TryFutureExt, TryStreamExt};
 use hyper::server::conn::Http;
 use hyper::service::Service;
 use log::info;
-use openapi_client::models::{self, Answer};
+use openapi_client::models::{self, Answer, Health};
 #[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
 use openssl::ssl::{Ssl, SslAcceptor, SslAcceptorBuilder, SslFiletype, SslMethod};
 use std::future::Future;
@@ -123,7 +123,10 @@ where
     async fn health(&self, context: &C) -> Result<HealthResponse, ApiError> {
         let context = context.clone();
         info!("health() - X-Span-ID: {:?}", context.get().0.clone());
-        Err(ApiError("Generic failure".into()))
+        let res = HealthResponse::HealthCheck(Health {
+            status: "ok".to_string(),
+        });
+        return Ok(res);
     }
 
     /// List all questions
