@@ -13,7 +13,7 @@ struct Question {
     correct_answer: String,
 }
 
-pub fn request_command_handler(_force: bool) {
+pub fn learn_command_handler(_force: bool) {
     let mut select = SelectView::new()
         // Center the text horizontally
         .h_align(HAlign::Center)
