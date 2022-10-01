@@ -79,9 +79,14 @@ ReLeaRN is built with Rust end-to-end, and uses Open Source Rust libraries to cr
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-```sh
-rlrn
-```
+According to the set daily goals and reminder interval, you will see the question of the quiz the next time you open a new tab of the terminal.
+
+<img src="images/quiz-question-example.png" alt="Quiz question example">
+
+If you want to participate in the quiz without waiting for the next reminder, you can call the quiz question at any time with a simple command:
+   ```sh
+   rlrn
+   ```
 
 <!-- ROADMAP -->
 ## Roadmap
