@@ -57,6 +57,7 @@ TBD
 
 - You should have a Unix-like OS (Linux, macOS, Windows **with WSL only**)
 - You should have [rust and cargo](https://www.rust-lang.org/tools/install) installed on your computer
+- **rlrn** currently only supports bash and zsh. Please make sure you use one of these
 
 ### Installation
 
