@@ -1,7 +1,7 @@
 use cursive::align::HAlign;
 use cursive::event::EventResult;
 use cursive::traits::*;
-use cursive::views::{Dialog, OnEventView, SelectView};
+use cursive::views::{Dialog, OnEventView, SelectView, TextView};
 use rand::Rng; // 0.8.5
 
 use serde::{Deserialize, Serialize};
@@ -34,7 +34,7 @@ pub fn learn_command_handler(_force: bool) {
     select.set_on_submit(move |s, item: &str| {
         if item == question.correct_answer {
             s.pop_layer();
-            s.add_layer(Dialog::info("Correct!"));
+            s.add_layer(Dialog::around(TextView::new("Correct!")).button("Quit", |s| s.quit()));
         } else {
             s.add_layer(Dialog::info("Wrong!"));
         }
@@ -49,9 +49,10 @@ pub fn learn_command_handler(_force: bool) {
             let cb = s.select_down(1);
             Some(EventResult::Consumed(Some(cb)))
         });
-    // Let's add a ResizedView to keep the list at a reasonable size
-    // (it can scroll anyway).
-    siv.add_layer(Dialog::around(select.scrollable()).title(question.question));
+
+    siv.add_layer(
+        Dialog::around(select.scrollable().fixed_size((20, 10))).title(question.question),
+    );
 
     siv.run();
 }

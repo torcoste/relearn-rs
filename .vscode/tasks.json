@@ -8,7 +8,30 @@
 				"$rustc"
 			],
 			"group": "build",
-			"label": "rust: cargo build"
+			"label": "cargo-build"
+		},
+		{
+			"type": "cargo",
+			"command": "run",
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": "build",
+			"label": "rust: cargo run",
+			"args": [
+				"learn"
+			],
+			"dependsOn": [],
+			"presentation": {
+				"echo": false,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"group": "build",
+				"clear": true,
+				"close": true
+			}
 		}
 	]
 }
