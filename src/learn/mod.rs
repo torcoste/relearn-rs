@@ -1,13 +1,11 @@
-
-
-
 use cursive::align::HAlign;
-
 
 use cursive::views::{Dialog, TextView};
 use rand::Rng; // 0.8.5
 
+use cursive::{traits::*, CursiveRunnable};
 use serde::{Deserialize, Serialize};
+use std::process::exit; // 0.8.5
 
 #[derive(Serialize, Deserialize, Clone)]
 struct Question {
@@ -29,7 +27,9 @@ pub fn learn_command_handler(_force: bool) {
     let mut siv = cursive::default();
 
     // Creates a dialog with a single "Quit" button
-    let table_view = TextView::new(&question.question).h_align(HAlign::Left);
+    let table_view = TextView::new(&question.question)
+        .h_align(HAlign::Left)
+        .scrollable();
     let mut dialog = Dialog::around(table_view).title("RLRN");
 
     // add buttons
@@ -41,14 +41,19 @@ pub fn learn_command_handler(_force: bool) {
             if answer.clone() == question.correct_answer {
                 s.add_layer(
                     Dialog::info("Correct!")
-                        .dismiss_button("Next")
-                        .button("Quit", |s| s.quit()),
+                        .button("Next", |_| learn_command_handler(true))
+                        .button("Quit", |_| std::process::exit(0)),
                 );
             } else {
                 s.add_layer(Dialog::info("Wrong!"));
             }
         });
     }
+
+    dialog = dialog.button("Hint", move |s| {
+        // s.pop_layer();
+        s.add_layer(Dialog::info(question.correct_answer.clone()));
+    });
 
     siv.add_layer(dialog);
 

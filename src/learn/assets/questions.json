@@ -1,22 +1,22 @@
 [{
         "question": "macro_rules! x {\n    ($n:expr) => {\n        let a = X($n);\n    };\n}\n\nstruct X(u64);\n\nimpl Drop for X {\n    fn drop(&mut self) {\n        print!(\"{}\", self.0);\n    }\n}\n\nfn main() {\n    let a = X(1);\n    x!(2);\n    print!(\"{}\", a.0);\n}",
-        "correct_answer": "The program exhibits undefined behavior",
+        "correct_answer": "The program is guaranteed to output: 112",
         "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 112"]
     },
     {
         "question": "macro_rules! m {\n    ($($s:stmt)*) => {\n        $(\n            { stringify!($s); 1 }\n        )<<*\n    };\n}\n\nfn main() {\n    print!(\n        \"{}{}{}\",\n        m! { return || true },\n        m! { (return) || true },\n        m! { {return} || true },\n    );\n}\n",
-        "correct_answer": "The program exhibits undefined behavior",
-        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 112"]
+        "correct_answer": "The program is guaranteed to output: 123",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 123"]
     },
     {
         "question": "struct S(i32);\n\nimpl std::ops::BitAnd<S> for () {\n    type Output = ();\n\n    fn bitand(self, rhs: S) {\n        print!(\"{}\", rhs.0);\n    }\n}\n\nfn main() {\n    let f = || ( () & S(1) );\n    let g = || { () & S(2) };\n    let h = || ( {} & S(3) );\n    let i = || { {} & S(4) };\n    f();\n    g();\n    h();\n    i();\n}",
-        "correct_answer": "The program exhibits undefined behavior",
-        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+        "correct_answer": "The program is guaranteed to output: 32",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 32"]
     },
     {
         "question": "struct S {\n    x: i32,\n}\n\nconst S: S = S { x: 2 };\n\nfn main() {\n    let v = &mut S;\n    v.x += 1;\n    S.x += 1;\n    print!(\"{}{}\", v.x, S.x);\n}",
-        "correct_answer": "The program exhibits undefined behavior",
-        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output:"]
+        "correct_answer": "The program is guaranteed to output: 54",
+        "answers": ["The program exhibits undefined behavior", "The program does not compile", "The program is guaranteed to output: 54"]
     },
     {
         "question": "fn main() {\n    let (.., x, y) = (0, 1, ..);\n    print!(\"{}\", b\"066\"[y][x]);\n}\n",
