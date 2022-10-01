@@ -74,7 +74,7 @@ pub fn learn_command_handler(force: bool) {
                     s.add_layer(
                         Dialog::info("Correct!")
                             .button("Next", |_| learn_command_handler(true))
-                            .button("Quit", |_| std::process::exit(0)),
+                            .button("Quit", |s| s.quit()),
                     );
                 } else {
                     let reference = question.reference[0].to_string();
