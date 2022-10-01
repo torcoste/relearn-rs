@@ -31,7 +31,7 @@ pub struct Question {
 pub fn learn_command_handler(force: bool) {
     if force || do_i_need_to_answer_question_now() {
         // vocabulary for identifiers
-        let vocabulrary: [char; 26] = [
+        let vocabulary: [char; 26] = [
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
             'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         ];
@@ -48,7 +48,7 @@ pub fn learn_command_handler(force: bool) {
         let mut question_content = random_question.question.clone();
         question_content.push('\n');
         for (index, answer) in random_question.answers.iter().enumerate() {
-            let ans = format!("\n{}. {}\n", vocabulrary[index], answer);
+            let ans = format!("\n{}. {}\n", vocabulary[index], answer);
             question_content.push_str(ans.as_str());
         }
 
@@ -64,7 +64,7 @@ pub fn learn_command_handler(force: bool) {
         for (index, _) in random_question.answers.iter().enumerate() {
             let question = random_question.clone();
 
-            answers_dialog = answers_dialog.button(vocabulrary[index], move |s| {
+            answers_dialog = answers_dialog.button(vocabulary[index], move |s| {
                 let answered_correctly = index as i64 == question.correct_answer;
                 update_daily_progress(answered_correctly);
 
