@@ -3,8 +3,8 @@ use clap::{Parser, Subcommand};
 mod init;
 use init::init_command_handler;
 
-mod request;
-use request::request_command_handler;
+mod learn;
+use learn::learn_command_handler;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -18,7 +18,7 @@ enum Commands {
     /// Initialize application (create config file, set autorun)
     Init {},
     /// Request quiz question
-    Request {
+    Learn {
         #[arg(long)]
         force: bool,
     },
@@ -31,9 +31,11 @@ fn main() {
         Some(Commands::Init {}) => {
             init_command_handler();
         }
-        Some(Commands::Request { force }) => {
-            request_command_handler(*force);
+        Some(Commands::Learn { force }) => {
+            learn_command_handler(*force);
         }
-        None => {}
+        None => {
+            learn_command_handler(true);
+        }
     }
 }
