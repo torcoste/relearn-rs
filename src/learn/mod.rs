@@ -1,10 +1,10 @@
-use std::borrow::Borrow;
-use std::clone;
+
+
 
 use cursive::align::HAlign;
-use cursive::event::EventResult;
-use cursive::traits::*;
-use cursive::views::{Dialog, OnEventView, SelectView, TextView};
+
+
+use cursive::views::{Dialog, TextView};
 use rand::Rng; // 0.8.5
 
 use serde::{Deserialize, Serialize};
@@ -18,7 +18,7 @@ struct Question {
 
 pub fn learn_command_handler(_force: bool) {
     // Let's override the `j` and `k` keys for navigation
-    let mut siv = cursive::default();
+    let _siv = cursive::default();
     // Read the list of cities from separate file, and fill the view with it.
     // (We include the file at compile-time to avoid runtime read errors.)
     let json_content = include_str!("assets/questions.json");
