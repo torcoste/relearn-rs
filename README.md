@@ -60,7 +60,8 @@ ReLeaRN is built with Rust end-to-end, and uses Open Source Rust libraries to cr
 
 - You should have a Unix-like OS (Linux, macOS, Windows **with WSL only**)
 - You should have [rust and cargo](https://www.rust-lang.org/tools/install) installed on your computer
-- `rlrn` currently only supports bash and zsh. Please make sure you use one of these
+- `rlrn` CLI currently only supports bash and zsh. Please make sure you use one of these
+- For building server crate you might need install pkg-config (`sudo apt install pkg-config`)
 
 ### Installation
 
