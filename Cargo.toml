@@ -1,6 +1,6 @@
 [package]
 name = "rlrn"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI tool for learning Rust effectively"
 keywords = ["cli", "learning", "SRS", "spaced-repetition", "quiz"]
 edition = "2021"
