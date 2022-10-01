@@ -1,6 +1,9 @@
 [workspace]
 members = [
-    "cli"
+    "cli",
+    "generated-rust-server",
+    "generated-rust-client",
+
 ]
 
 [profile.release]

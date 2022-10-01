@@ -1,27 +1,576 @@
-[{
-        "no": 1,
-        "level": 1,
-        "question": "Which type cast preserves the mathematical value in all cases?",
-        "correct_answer": 2,
-        "answers": ["i64 as i32", "usize as u64", "usize as u64", "f64 as f32"],
-        "point_reward": 5,
-        "tags": [""],
-        "hint": "",
-        "reference": [""],
-        "correct_response": "",
-        "wrong_response": ""
-    },
-    {
-        "no": 2,
-        "level": 1,
-        "question": "What do the vertical bars represent here?\n\nstr::thread::spawn(|| {\n    println!(\"LinkedIn\");\n});",
-        "correct_answer": 0,
-        "answers": ["a closure", "a thread", "a future", "a block"],
-        "point_reward": 5,
-        "tags": [""],
-        "hint": "",
-        "reference": ["https://doc.rust-lang.org/book/ch13-01-closures.html#refactoring-with-closures-to-store-code"],
-        "correct_response": "",
-        "wrong_response": ""
-    }
+[
+	{
+		"no": 1,
+		"level": 1,
+		"question": "Which type cast preserves the mathematical value in all cases?",
+		"correct_answer": 2,
+		"answers": [
+			"i64 as i32",
+			"usize as u64",
+			"usize as u64",
+			"f64 as f32"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 2,
+		"level": 1,
+		"question": "What do the vertical bars represent here?\nstr::thread::spawn(|| {\n    println!(\"LinkedIn\");\n});",
+		"correct_answer": 0,
+		"answers": [
+			"a closure",
+			"a thread",
+			"a future",
+			"a block"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/book/ch13-01-closures.html#refactoring-with-closures-to-store-code"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 3,
+		"level": 1,
+		"question": "Which choice is not a scalar data type?",
+		"correct_answer": 3,
+		"answers": [
+			"integer",
+			"float",
+			"boolean",
+			"tuple"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 4,
+		"level": 1,
+		"question": "cannot be destructured.",
+		"correct_answer": 3,
+		"answers": [
+			"Traits",
+			"Tuples",
+			"Enums",
+			"Structs"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://rust-lang.github.io/rfcs/2909-destructuring-assignment.html"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 5,
+		"level": 1,
+		"question": "Which cargo command checks a program for error without creating a binary executable?",
+		"correct_answer": 3,
+		"answers": [
+			"cargo --version",
+			"cargo init",
+			"cargo build",
+			"cargo check"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 6,
+		"level": 1,
+		"question": "The term box and related phrases such as boxing a value are often used when relating to memory layout. What does box refer to?",
+		"correct_answer": 1,
+		"answers": [
+			"It's creating a pointer on the heap that points to a value on the stack.",
+			"It's creating a pointer on the stack that points to a value on the heap.",
+			"It's creating a memory guard around values to prevent illegal access.",
+			"It's an abstraction that refers to ownership.",
+			"Boxed values are clearly labelled."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 7,
+		"level": 1,
+		"question": "What is an alternative way of writing slice that produces the same result?\n\n...\nlet s = String::form(\"hello\");\nlet slice = &s[0..2];",
+		"correct_answer": 3,
+		"answers": [
+			"let slice = &s[len + 2];",
+			"let slice = &s[len - 2];",
+			"let slice = &s.copy(0..2);",
+			"let slice = &s[..2];"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 8,
+		"level": 1,
+		"question": "Using the ? operator at the end of an expression is equivalent to _.",
+		"correct_answer": 3,
+		"answers": [
+			"a match pattern that branches into True or False",
+			"calling ok_error()",
+			"calling panic!()",
+			"a match pattern that may result an early return"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 9,
+		"level": 1,
+		"question": "Which is valid syntax for defining an array of i32 values?",
+		"correct_answer": 3,
+		"answers": [
+			"Array::with_capacity(10)",
+			"[i32]",
+			"Array::new(10)",
+			"[i32; 10]"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 10,
+		"level": 1,
+		"question": "What syntax is required to take a mutable reference to T, when used within a function argument?\n\nfn increment(i: T) {\n    // body elided\n}",
+		"correct_answer": 3,
+		"answers": [
+			"Array::with_capacity(10)",
+			"[i32]",
+			"Array::new(10)",
+			"[i32; 10]"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 11,
+		"level": 1,
+		"question": "The smart pointers Rc and Arc provide reference counting. What is the API for incrementing a reference count?",
+		"correct_answer": 2,
+		"answers": [
+			".add()",
+			".incr()",
+			".clone()",
+			".increment()"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/book/ch15-04-rc.html"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 12,
+		"level": 1,
+		"question": "What happens when an error occurs that is being handled by the question mark (?) operator?",
+		"correct_answer": 2,
+		"answers": [
+			"The error is reported and execution continues.",
+			"An exception is raised. The effect(s) of the exception are defined by the error! macro.",
+			"The program panics immediately.",
+			"Rust attempts to convert the error to the local function's error type and return it as Result::Err. If that fails, the program panics."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 13,
+		"level": 1,
+		"question": "Which comment syntax is not legal?",
+		"correct_answer": 1,
+		"answers": [
+			"/*",
+			"#",
+			"//!",
+			"//"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 14,
+		"level": 1,
+		"question": "In matching patterns, values are ignored with _.",
+		"correct_answer": 2,
+		"answers": [
+			".ignore()",
+			"an underscore (_)",
+			"..",
+			"skip"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 15,
+		"level": 1,
+		"question": "Defining a _ requires a lifetime parameter.",
+		"correct_answer": 1,
+		"answers": [
+			"function that ends the lifetime of one of its arguments",
+			"struct that contains a reference to a value",
+			"function with a generic argument",
+			"struct that contains a reference to a boxed value"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html#lifetime-annotations-in-struct-definitions"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 16,
+		"level": 1,
+		"question": "Which example correctly uses std::collections::HashMap's Entry API to populate counts?\n\nuse std::collections::HashMap;\nfn main() {\n    let mut counts = HashMap::new();\n    let text = \"LinkedIn Learning\";\n    for c in text.chars() {\n        // Complete this block\n    }\n    println!(\"{:?}\", counts);\n}",
+		"correct_answer": 1,
+		"answers": [
+			"for c in text.chars() {\n    if let Some(count) = &mut counts.get(&c) {\n        counts.insert(c, *count + 1);\n    } else {\n        counts.insert(c, 1);\n    };\n}",
+			"for c in text.chars() {\n    let count = counts.entry(c).or_insert(0);\n    *count += 1;\n}",
+			"for c in text.chars() {\n    let count = counts.entry(c);\n    *count += 1;\n}",
+			"for c in text.chars() {\n    counts.entry(c).or_insert(0).map(|x| x + 1);\n}"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.entry"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 17,
+		"level": 1,
+		"question": "Which fragment does not incur memory allocations while writing to a \"file\" (represented by a Vec)?\n\nuse std::collections::HashMap;\n\nfn main() -> Result<(), Box<dyn std::error::Error>> {\n    let mut v = Vec::<u8>::new();\n\n    let a = \"LinkedIn\";\n    let b = 123;\n    let c = '🧀';\n\n    // replace this line\n\n    println!(\"{:?}\", v);\n\n    Ok(())\n}",
+		"correct_answer": 0,
+		"answers": [
+			"write!(&mut v, \"{}{}{}\", a, b, c)?;",
+			"v.write(a)?;\nv.write(b)?;\nv.write(c)?;",
+			"v.write(a, b, c)?;",
+			"v.write_all(a.as_bytes())?;\nv.write_all(&b.to_string().as_bytes())?;\nc.encode_utf8(&mut v);"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://users.rust-lang.org/t/formatting-and-writing-to-a-file-without-malloc-or-locks/52295/9",
+			"https://doc.rust-lang.org/std/macro.write.html"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 18,
+		"level": 1,
+		"question": "Does the main function compile? If so, why? If not, what do you need to change?\n\nfn main() {\n    let Some(x) = some_option_value;\n}",
+		"correct_answer": 2,
+		"answers": [
+			"The code does not compile. let statements require a refutable pattern. Add if before let.",
+			"The code compiles. let statements sometimes require a refutable pattern.",
+			"The code does not compile. let statements requires an irrefutable pattern. Add if before let.",
+			"The code compiles. let do not require a refutable pattern."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 19,
+		"level": 1,
+		"question": "Which statement about lifetimes is false?",
+		"correct_answer": 3,
+		"answers": [
+			"Lifetimes were redundantly specified in previous version of Rust.",
+			"Lifetimes are specified when a struct is holding a reference to a value.",
+			"Lifetimes are specified when certain values must outlive others.",
+			"Lifetimes are always inferred by the compiler."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 20,
+		"level": 1,
+		"question": "When used as a return type, which Rust type plays a similar role to Python's None, JavaScript's null, or the void type in C/C++?",
+		"correct_answer": 3,
+		"answers": [
+			"!",
+			"None",
+			"Null",
+			"()"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 21,
+		"level": 1,
+		"question": "To convert a Result to an Option, which method should you use?",
+		"correct_answer": 2,
+		"answers": [
+			".as_option()",
+			".ok()",
+			".to_option()",
+			".into()"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			""
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 22,
+		"level": 1,
+		"question": "Which statement about the Clone and Copy traits is false?",
+		"correct_answer": 0,
+		"answers": [
+			"Copy is enabled for primitive, built-in types.",
+			"Without Copy, Rust applies move semantics to a type's access.",
+			"When using Clone, copying data is explicit.",
+			"Until a type implements either Copy or Clone, its internal data cannot be copied."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://stackoverflow.com/questions/41413336/do-all-primitive-types-implement-the-copy-trait"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 23,
+		"level": 1,
+		"question": "Why does this code not compile?\n\nfn returns_closure() -> dyn Fn(i32) -> i32 {\n    |x| x + 1\n}",
+		"correct_answer": 3,
+		"answers": [
+			"The returned fn pointer and value need to be represented by another trait.",
+			"Closures are types, so they cannot be returned directly from a function.",
+			"Closures are types and can be returned only if the concrete trait is implemented.",
+			"Closures are represented by traits, so they cannot be a return type."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html#returning-closures"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 24,
+		"level": 0,
+		"question": "What smart pointer is used to allow multiple ownership of a value in various threads?",
+		"correct_answer": 2,
+		"answers": [
+			"Arc<T>",
+			"Box<T>",
+			"Both Arc<T> and Rc<T> are multithread safe.",
+			"Rc<T>"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/book/ch16-03-shared-state.html?highlight=arc%3CT%3E#atomic-reference-counting-with-arct"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 25,
+		"level": 2,
+		"question": "Which types are not allowed within an enum variant's body?",
+		"correct_answer": 2,
+		"answers": [
+			"zero-sized types",
+			"structs",
+			"trait objects",
+			"floating-point numbers"
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/reference/types/trait-object.html"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	},
+	{
+		"no": 26,
+		"level": 2,
+		"question": " Which statement about this code is true?\n\nfn main() {\n    let c = 'z';\n    let heart_eyed_cat = '😻';\n}",
+		"correct_answer": 0,
+		"answers": [
+			"Both are character literals.",
+			"heart_eyed_cat is an invalid expression.",
+			"c is a string literal and heart_eyed_cat is a character literal.",
+			"fBoth are string literals."
+		],
+		"point_reward": 5,
+		"tags": [
+			""
+		],
+		"hint": "",
+		"reference": [
+			"https://doc.rust-lang.org/std/primitive.char.html"
+		],
+		"correct_response": "",
+		"wrong_response": ""
+	}
 ]

@@ -1,0 +1,145 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Petstore
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  contact:
+    name: Swagger API Team
+    url: https://swagger.io
+    email: m@m.com
+  description: "This is a sample Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters."
+
+tags:
+  - name: relern
+    description: "Everything about relern"
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+servers:
+  - url: "localhost:8080"
+    description: Optional server description, e.g. Main (production) server
+paths:
+  /questions:
+    get:
+      summary: List all questions
+      operationId: listQuestions
+      tags:
+        - relern
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: List of all the users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Question"
+  /answers:
+    post:
+      summary: Create a new answer
+      operationId: createAnswer
+      tags:
+        - relern
+      responses:
+        "200":
+          description: Created answer
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Answer"
+  /health:
+    get:
+      summary: Health check
+      operationId: health
+      tags:
+        - relern
+      responses:
+        "200":
+          description: Health check
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+components:
+  schemas:
+    Answer:
+      type: object
+      required:
+        - questionId
+      properties:
+        questionId:
+          type: integer
+          format: int64
+        valid:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        user_id:
+          type: integer
+          format: int64
+        org_id:
+          type: integer
+          format: int64
+    Question:
+      type: object
+      required:
+        - level
+        - tag
+        - question
+        - correct_answer
+        - answers
+        - hint
+        - point_reward
+      properties:
+        level:
+          type: string
+        tag:
+          type: string
+        number:
+          type: integer
+          format: int64
+        question:
+          type: string
+        correct_answer:
+          type: integer
+          format: int64
+        answers:
+          type: array
+          items:
+            type: string
+        point_reward:
+          type: integer
+          format: int64
+        tags:
+          type: array
+          items:
+            type: string
+        hint:
+          type: string
+        reference:
+          type: array
+          items:
+            type: string
+        correct_response:
+          type: string
+        wrong_response:
+          type: string
+    Health:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
