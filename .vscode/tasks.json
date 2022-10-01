@@ -2,6 +2,12 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "generate-openapi",
+			"type": "shell",
+			"command": "make generate-openapi",
+			"problemMatcher": []
+		},
+		{
 			"type": "cargo",
 			"command": "build",
 			"problemMatcher": [
