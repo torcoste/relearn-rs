@@ -1,5 +1,7 @@
 use clap::{Parser, Subcommand};
 
+mod configs;
+
 mod init;
 use init::init_command_handler;
 
