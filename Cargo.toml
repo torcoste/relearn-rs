@@ -6,14 +6,17 @@ edition = "2021"
 license = "MIT"
 repository = "https://github.com/torcoste/relearn-rs"
 
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
 name = "rlrn"
 path = "src/main.rs"
 
+[dependencies.clap]
+version = "4.0.7"
+features = ["derive"]
 
-[dependencies]
-clap = { version = "4.0.7", features = ["derive"] }
-cursive = "0.20"
+[dependencies.cursive]
+version = "0.20"
+default-features = false
+features = ["termion-backend"]
