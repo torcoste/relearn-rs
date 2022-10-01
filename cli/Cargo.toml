@@ -34,3 +34,6 @@ features = ["termion-backend"]
 
 [dependencies.confy]
 version = "0.5.0"
+
+[dependencies.chrono]
+version = "0.4.22"
