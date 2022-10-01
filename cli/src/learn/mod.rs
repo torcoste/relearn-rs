@@ -48,7 +48,7 @@ pub fn learn_command_handler(force: bool) {
         let mut siv = cursive::default();
 
         let mut question_content = random_question.question.clone();
-        question_content.push_str("\n");
+        question_content.push('\n');
         for (index, answer) in random_question.answers.iter().enumerate() {
             let ans = format!("\n{}. {}\n", vocabulrary[index], answer);
             question_content.push_str(ans.as_str());

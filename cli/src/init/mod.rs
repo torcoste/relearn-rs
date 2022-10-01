@@ -63,8 +63,6 @@ pub fn init_command_handler() {
     let reminder_interval_select = reminder_interval_select.with_name("reminder_interval_select");
 
     let layout = {
-        let output_config_rc = output_config_rc.clone();
-
         LinearLayout::vertical()
             // Daily goal
             .child(

@@ -30,7 +30,7 @@ pub struct Answer {
 impl Answer {
     pub fn new(question_id: i64) -> Answer {
         Answer {
-            question_id: question_id,
+            question_id,
             valid: None,
             created_at: None,
             user_id: None,
@@ -66,7 +66,7 @@ impl std::string::ToString for Answer {
             params.push(org_id.to_string());
         }
 
-        params.join(",").to_string()
+        params.join(",")
     }
 }
 
@@ -90,7 +90,7 @@ impl std::str::FromStr for Answer {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -139,7 +139,7 @@ impl std::str::FromStr for Answer {
                 .question_id
                 .into_iter()
                 .next()
-                .ok_or("questionId missing in Answer".to_string())?,
+                .ok_or_else(|| "questionId missing in Answer".to_string())?,
             valid: intermediate_rep.valid.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
             user_id: intermediate_rep.user_id.into_iter().next(),
@@ -202,7 +202,7 @@ pub struct Health {
 
 impl Health {
     pub fn new(status: String) -> Health {
-        Health { status: status }
+        Health { status }
     }
 }
 
@@ -216,7 +216,7 @@ impl std::string::ToString for Health {
         params.push("status".to_string());
         params.push(self.status.to_string());
 
-        params.join(",").to_string()
+        params.join(",")
     }
 }
 
@@ -236,7 +236,7 @@ impl std::str::FromStr for Health {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -273,7 +273,7 @@ impl std::str::FromStr for Health {
                 .status
                 .into_iter()
                 .next()
-                .ok_or("status missing in Health".to_string())?,
+                .ok_or_else(|| "status missing in Health".to_string())?,
         })
     }
 }
@@ -379,15 +379,15 @@ impl Question {
         hint: String,
     ) -> Question {
         Question {
-            level: level,
-            tag: tag,
+            level,
+            tag,
             number: None,
-            question: question,
-            correct_answer: correct_answer,
-            answers: answers,
-            point_reward: point_reward,
+            question,
+            correct_answer,
+            answers,
+            point_reward,
             tags: None,
-            hint: hint,
+            hint,
             reference: None,
             correct_response: None,
             wrong_response: None,
@@ -425,8 +425,7 @@ impl std::string::ToString for Question {
                 .iter()
                 .map(|x| x.to_string())
                 .collect::<Vec<_>>()
-                .join(",")
-                .to_string(),
+                .join(","),
         );
 
         params.push("point_reward".to_string());
@@ -438,8 +437,7 @@ impl std::string::ToString for Question {
                 tags.iter()
                     .map(|x| x.to_string())
                     .collect::<Vec<_>>()
-                    .join(",")
-                    .to_string(),
+                    .join(","),
             );
         }
 
@@ -453,8 +451,7 @@ impl std::string::ToString for Question {
                     .iter()
                     .map(|x| x.to_string())
                     .collect::<Vec<_>>()
-                    .join(",")
-                    .to_string(),
+                    .join(","),
             );
         }
 
@@ -468,7 +465,7 @@ impl std::string::ToString for Question {
             params.push(wrong_response.to_string());
         }
 
-        params.join(",").to_string()
+        params.join(",")
     }
 }
 
@@ -499,7 +496,7 @@ impl std::str::FromStr for Question {
         let mut intermediate_rep = IntermediateRep::default();
 
         // Parse into intermediate representation
-        let mut string_iter = s.split(',').into_iter();
+        let mut string_iter = s.split(',');
         let mut key_result = string_iter.next();
 
         while key_result.is_some() {
@@ -583,39 +580,39 @@ impl std::str::FromStr for Question {
                 .level
                 .into_iter()
                 .next()
-                .ok_or("level missing in Question".to_string())?,
+                .ok_or_else(|| "level missing in Question".to_string())?,
             tag: intermediate_rep
                 .tag
                 .into_iter()
                 .next()
-                .ok_or("tag missing in Question".to_string())?,
+                .ok_or_else(|| "tag missing in Question".to_string())?,
             number: intermediate_rep.number.into_iter().next(),
             question: intermediate_rep
                 .question
                 .into_iter()
                 .next()
-                .ok_or("question missing in Question".to_string())?,
+                .ok_or_else(|| "question missing in Question".to_string())?,
             correct_answer: intermediate_rep
                 .correct_answer
                 .into_iter()
                 .next()
-                .ok_or("correct_answer missing in Question".to_string())?,
+                .ok_or_else(|| "correct_answer missing in Question".to_string())?,
             answers: intermediate_rep
                 .answers
                 .into_iter()
                 .next()
-                .ok_or("answers missing in Question".to_string())?,
+                .ok_or_else(|| "answers missing in Question".to_string())?,
             point_reward: intermediate_rep
                 .point_reward
                 .into_iter()
                 .next()
-                .ok_or("point_reward missing in Question".to_string())?,
+                .ok_or_else(|| "point_reward missing in Question".to_string())?,
             tags: intermediate_rep.tags.into_iter().next(),
             hint: intermediate_rep
                 .hint
                 .into_iter()
                 .next()
-                .ok_or("hint missing in Question".to_string())?,
+                .ok_or_else(|| "hint missing in Question".to_string())?,
             reference: intermediate_rep.reference.into_iter().next(),
             correct_response: intermediate_rep.correct_response.into_iter().next(),
             wrong_response: intermediate_rep.wrong_response.into_iter().next(),

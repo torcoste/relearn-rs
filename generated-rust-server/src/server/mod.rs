@@ -99,7 +99,7 @@ where
 {
     pub fn new(api_impl: T) -> Self {
         Service {
-            api_impl: api_impl,
+            api_impl,
             marker: PhantomData,
         }
     }
@@ -113,7 +113,7 @@ where
     fn clone(&self) -> Self {
         Service {
             api_impl: self.api_impl.clone(),
-            marker: self.marker.clone(),
+            marker: self.marker,
         }
     }
 }
@@ -157,7 +157,6 @@ where
                                 .get()
                                 .0
                                 .clone()
-                                .to_string()
                                 .as_str(),
                         )
                         .expect("Unable to create X-Span-ID header value"),
@@ -199,7 +198,6 @@ where
                                 .get()
                                 .0
                                 .clone()
-                                .to_string()
                                 .as_str(),
                         )
                         .expect("Unable to create X-Span-ID header value"),
@@ -241,7 +239,7 @@ where
                         .iter()
                         .filter(|e| e.0 == "limit")
                         .map(|e| e.1.to_owned())
-                        .nth(0);
+                        .next();
                     let param_limit = match param_limit {
                         Some(param_limit) => {
                             let param_limit = <i64 as std::str::FromStr>::from_str(&param_limit);
@@ -265,7 +263,6 @@ where
                                 .get()
                                 .0
                                 .clone()
-                                .to_string()
                                 .as_str(),
                         )
                         .expect("Unable to create X-Span-ID header value"),

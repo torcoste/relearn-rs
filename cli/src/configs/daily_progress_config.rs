@@ -1,19 +1,10 @@
 use chrono::{Datelike, Local, NaiveDateTime};
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct DailyProgressConfig {
     pub questions_answered: i32,
     pub last_time_asked_timestamp: i64,
-}
-
-impl ::std::default::Default for DailyProgressConfig {
-    fn default() -> Self {
-        Self {
-            questions_answered: 0,
-            last_time_asked_timestamp: 0,
-        }
-    }
 }
 
 fn load_config() -> Result<DailyProgressConfig, confy::ConfyError> {
@@ -62,7 +53,7 @@ pub fn do_i_need_to_answer_question_now() -> bool {
         }
     }
 
-    return false;
+    false
 }
 
 pub fn update_daily_progress(answered_correctly: bool) {
