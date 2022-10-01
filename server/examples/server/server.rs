@@ -1,4 +1,4 @@
-//! Main library entry point for openapi_client implementation.
+//! Main library entry point for rlrn_server implementation.
 
 #![allow(unused_imports)]
 
@@ -7,7 +7,7 @@ use futures::{future, Stream, StreamExt, TryFutureExt, TryStreamExt};
 use hyper::server::conn::Http;
 use hyper::service::Service;
 use log::info;
-use openapi_client::models::{self, Answer, Health};
+use rlrn_server::models::{self, Answer, Health};
 #[cfg(not(any(target_os = "macos", target_os = "windows", target_os = "ios")))]
 use openssl::ssl::{Ssl, SslAcceptor, SslAcceptorBuilder, SslFiletype, SslMethod};
 use std::future::Future;
@@ -32,7 +32,7 @@ pub async fn create(addr: &str, https: bool) {
 
     let service = MakeAllowAllAuthenticator::new(service, "cosmo");
 
-    let service = openapi_client::server::context::MakeAddContext::<_, EmptyContext>::new(service);
+    let mut service = rlrn_server::server::context::MakeAddContext::<_, EmptyContext>::new(service);
 
     if https {
         #[cfg(any(target_os = "macos", target_os = "windows", target_os = "ios"))]
@@ -96,8 +96,8 @@ impl<C> Server<C> {
     }
 }
 
-use openapi_client::server::MakeService;
-use openapi_client::{Api, CreateAnswerResponse, HealthResponse, ListQuestionsResponse};
+use rlrn_server::server::MakeService;
+use rlrn_server::{Api, CreateAnswerResponse, HealthResponse, ListQuestionsResponse};
 use swagger::ApiError;
 
 #[async_trait]

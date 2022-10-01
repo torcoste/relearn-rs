@@ -1166,52 +1166,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e82dad04139b71a90c080c8463fe0dc7902db5192d939bd0950f074d014339e1"
 
 [[package]]
-name = "openapi"
-version = "1.0.0"
-dependencies = [
- "reqwest",
- "serde",
- "serde_derive",
- "serde_json",
- "url",
- "uuid 1.1.2",
-]
-
-[[package]]
-name = "openapi_client"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "chrono",
- "clap 2.34.0",
- "env_logger",
- "frunk",
- "frunk-enum-core",
- "frunk-enum-derive",
- "frunk_core",
- "frunk_derives",
- "futures",
- "hyper",
- "hyper-openssl",
- "hyper-tls",
- "lazy_static",
- "log",
- "mime",
- "native-tls",
- "openssl",
- "percent-encoding 2.2.0",
- "regex",
- "serde",
- "serde_ignored",
- "serde_json",
- "swagger",
- "tokio",
- "tokio-openssl",
- "tokio-postgres",
- "url",
-]
-
-[[package]]
 name = "openssl"
 version = "0.10.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1583,6 +1537,52 @@ dependencies = [
  "rand",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "rlrn-sdk"
+version = "1.0.0"
+dependencies = [
+ "reqwest",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "url",
+ "uuid 1.1.2",
+]
+
+[[package]]
+name = "rlrn-server"
+version = "1.0.0"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "clap 2.34.0",
+ "env_logger",
+ "frunk",
+ "frunk-enum-core",
+ "frunk-enum-derive",
+ "frunk_core",
+ "frunk_derives",
+ "futures",
+ "hyper",
+ "hyper-openssl",
+ "hyper-tls",
+ "lazy_static",
+ "log",
+ "mime",
+ "native-tls",
+ "openssl",
+ "percent-encoding 2.2.0",
+ "regex",
+ "serde",
+ "serde_ignored",
+ "serde_json",
+ "swagger",
+ "tokio",
+ "tokio-openssl",
+ "tokio-postgres",
+ "url",
 ]
 
 [[package]]

@@ -1,8 +1,8 @@
 [workspace]
 members = [
     "cli",
-    "generated-rust-server",
-    "generated-rust-client",
+    "server",
+    "sdk",
 
 ]
 

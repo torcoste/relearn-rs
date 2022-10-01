@@ -1,9 +1,6 @@
 [package]
-name = "openapi_client"
+name = "rlrn-server"
 version = "1.0.0"
-authors = ["m@m.com"]
-description = "This is a sample Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters."
-license = "Unlicense"
 edition = "2018"
 
 [features]

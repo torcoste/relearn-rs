@@ -4,7 +4,7 @@
 #[allow(unused_imports)]
 use futures::{future, Stream, stream};
 #[allow(unused_imports)]
-use openapi_client::{Api, ApiNoContext, Client, ContextWrapperExt, models,
+use rlrn_server::{Api, ApiNoContext, Client, ContextWrapperExt, models,
                       CreateAnswerResponse,
                       HealthResponse,
                       ListQuestionsResponse,
