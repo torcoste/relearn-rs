@@ -69,10 +69,12 @@ ReLeaRN is built with Rust end-to-end, and uses Open Source Rust libraries to cr
    ```sh
    cargo install rlrn
    ```
-2. Instialize app to see quiz when you open new terminal
+2. Initialize app to see quiz when you open new terminal
    ```sh
    rlrn init
    ```
+3. Set your daily goal and reminder interval
+   <img src="images/settings.png" alt="Settings">
 
 <!-- USAGE EXAMPLES -->
 ## Usage
