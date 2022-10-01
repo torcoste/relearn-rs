@@ -34,6 +34,8 @@ fn main() {
         Some(Commands::Learn { force }) => {
             learn_command_handler(*force);
         }
-        None => {}
+        None => {
+            learn_command_handler(true);
+        }
     }
 }
