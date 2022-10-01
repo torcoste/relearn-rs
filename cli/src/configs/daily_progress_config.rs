@@ -19,6 +19,16 @@ fn set_config(config: DailyProgressConfig) -> Result<(), confy::ConfyError> {
     Ok(())
 }
 
+pub fn reset_config() -> Result<(), confy::ConfyError> {
+    let path = confy::get_configuration_file_path("rlrn", Some("daily_progress_config"))?;
+
+    let path = path.to_str().expect("Failed to convert path to string");
+
+    std::fs::remove_file(path).expect("Failed to remove file");
+
+    Ok(())
+}
+
 pub fn do_i_need_to_answer_question_now() -> bool {
     let mut daily_progress_config = load_config().expect("Failed to load daily progress config");
 

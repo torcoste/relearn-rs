@@ -83,6 +83,11 @@ If you want to participate in the quiz without waiting for the next reminder, yo
    rlrn
    ```
 
+If you want to reset your progress and settings you can do so with the command:
+   ```sh
+   rlrn reset
+   ```
+
 <!-- ROADMAP -->
 ## Roadmap
 

@@ -8,6 +8,9 @@ use init::init_command_handler;
 mod learn;
 use learn::learn_command_handler;
 
+mod reset;
+use reset::reset_command_handler;
+
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Cli {
@@ -24,6 +27,7 @@ enum Commands {
         #[arg(long)]
         force: bool,
     },
+    Reset {},
 }
 
 fn main() {
@@ -38,7 +42,11 @@ fn main() {
         Some(Commands::Learn { force }) => {
             learn_command_handler(*force);
         }
+        Some(Commands::Reset {}) => {
+            reset_command_handler();
+        }
         None => {
+            // When we run `rlrn` without any arguments, we want to run `rlrn learn --force` command
             learn_command_handler(true);
         }
     }

@@ -26,3 +26,13 @@ pub fn set_config(config: UserConfig) -> Result<(), confy::ConfyError> {
 
     Ok(())
 }
+
+pub fn reset_config() -> Result<(), confy::ConfyError> {
+    let path = confy::get_configuration_file_path("rlrn", Some("user_config"))?;
+
+    let path = path.to_str().expect("Failed to convert path to string");
+
+    std::fs::remove_file(path).expect("Failed to remove file");
+
+    Ok(())
+}
