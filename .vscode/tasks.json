@@ -17,9 +17,9 @@
 				"$rustc"
 			],
 			"group": "build",
-			"label": "cargo-run",
+			"label": "rust: cargo run",
 			"args": [
-				"request"
+				"learn"
 			],
 			"dependsOn": [],
 			"presentation": {
@@ -32,6 +32,6 @@
 				"clear": true,
 				"close": true
 			}
-		},
+		}
 	]
 }
