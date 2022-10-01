@@ -36,8 +36,6 @@ pub fn learn_command_handler(force: bool) {
             'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
         ];
 
-        // Let's override the `j` and `k` keys for navigation
-        let _siv = cursive::default();
         // Read the list of questions from separate file, and fill the view with it.
         // (We include the file at compile-time to avoid runtime read errors.)
         let json_content = include_str!("assets/questions.json");
@@ -71,14 +69,19 @@ pub fn learn_command_handler(force: bool) {
                 update_daily_progress(answered_correctly);
 
                 if answered_correctly {
-                    s.add_layer(
-                        Dialog::info("Correct!")
-                            .button("Next", |_| learn_command_handler(true))
-                            .button("Quit", |s| s.quit()),
-                    );
+                    let mut dialog = Dialog::text("Correct!");
+                    (&mut dialog).clear_buttons();
+
+                    let dialog = add_buttons_to_dialog(dialog);
+                    s.add_layer(dialog);
                 } else {
                     let reference = question.reference[0].to_string();
-                    s.add_layer(Dialog::info(format!("Wrong.\n\n{}", reference)));
+                    let mut dialog = Dialog::info(format!("Wrong.\n\n{}", reference));
+
+                    (&mut dialog).clear_buttons();
+
+                    let dialog = add_buttons_to_dialog(dialog);
+                    s.add_layer(dialog);
                 }
             });
         }
@@ -94,4 +97,14 @@ pub fn learn_command_handler(force: bool) {
         // Starts the event loop.
         siv.run();
     }
+}
+
+fn add_buttons_to_dialog(dialog: Dialog) -> Dialog {
+    dialog
+        .dismiss_button("Back")
+        .button("Next", |s| {
+            s.quit();
+            learn_command_handler(true);
+        })
+        .button("Quit", |s| s.quit())
 }
