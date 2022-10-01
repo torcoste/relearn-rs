@@ -69,7 +69,8 @@ pub fn learn_command_handler(_force: bool) {
                         .button("Quit", |_| std::process::exit(0)),
                 );
             } else {
-                s.add_layer(Dialog::info("Wrong!"));
+                let reference = question.reference[0].to_string();
+                s.add_layer(Dialog::info(format!("Wrong.\n\n{}", reference)));
             }
         });
     }
