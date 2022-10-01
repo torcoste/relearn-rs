@@ -3,9 +3,8 @@ use cursive::align::HAlign;
 use cursive::views::{Dialog, TextView};
 use rand::Rng; // 0.8.5
 
-use cursive::{traits::*, CursiveRunnable};
+use cursive::traits::*;
 use serde::{Deserialize, Serialize};
-use std::process::exit; // 0.8.5
 
 #[derive(Serialize, Deserialize, Clone)]
 struct Question {
@@ -17,7 +16,7 @@ struct Question {
 pub fn learn_command_handler(_force: bool) {
     // Let's override the `j` and `k` keys for navigation
     let _siv = cursive::default();
-    // Read the list of cities from separate file, and fill the view with it.
+    // Read the list of questions from separate file, and fill the view with it.
     // (We include the file at compile-time to avoid runtime read errors.)
     let json_content = include_str!("assets/questions.json");
     let questions: Vec<Question> = serde_json::from_str(json_content).unwrap();
