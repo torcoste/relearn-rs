@@ -1,8 +1,8 @@
 #![allow(unused_qualifications)]
 
-use crate::models;
 #[cfg(any(feature = "client", feature = "server"))]
 use crate::header;
+use crate::models;
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -11,25 +11,24 @@ pub struct Answer {
     pub question_id: i64,
 
     #[serde(rename = "valid")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub valid: Option<bool>,
 
     #[serde(rename = "created_at")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 
     #[serde(rename = "user_id")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub user_id: Option<i64>,
 
     #[serde(rename = "org_id")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub org_id: Option<i64>,
-
 }
 
 impl Answer {
-    pub fn new(question_id: i64, ) -> Answer {
+    pub fn new(question_id: i64) -> Answer {
         Answer {
             question_id: question_id,
             valid: None,
@@ -50,7 +49,6 @@ impl std::string::ToString for Answer {
         params.push("questionId".to_string());
         params.push(self.question_id.to_string());
 
-
         if let Some(ref valid) = self.valid {
             params.push("valid".to_string());
             params.push(valid.to_string());
@@ -58,12 +56,10 @@ impl std::string::ToString for Answer {
 
         // Skipping created_at in query parameter serialization
 
-
         if let Some(ref user_id) = self.user_id {
             params.push("user_id".to_string());
             params.push(user_id.to_string());
         }
-
 
         if let Some(ref org_id) = self.org_id {
             params.push("org_id".to_string());
@@ -86,7 +82,7 @@ impl std::str::FromStr for Answer {
         struct IntermediateRep {
             pub question_id: Vec<i64>,
             pub valid: Vec<bool>,
-            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime<chrono::Utc>>,
             pub user_id: Vec<i64>,
             pub org_id: Vec<i64>,
         }
@@ -100,17 +96,36 @@ impl std::str::FromStr for Answer {
         while key_result.is_some() {
             let val = match string_iter.next() {
                 Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing Answer".to_string())
+                None => {
+                    return std::result::Result::Err(
+                        "Missing value while parsing Answer".to_string(),
+                    )
+                }
             };
 
             if let Some(key) = key_result {
                 match key {
-                    "questionId" => intermediate_rep.question_id.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "valid" => intermediate_rep.valid.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "created_at" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "user_id" => intermediate_rep.user_id.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "org_id" => intermediate_rep.org_id.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing Answer".to_string())
+                    "questionId" => intermediate_rep.question_id.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "valid" => intermediate_rep.valid.push(
+                        <bool as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "created_at" => intermediate_rep.created_at.push(
+                        <chrono::DateTime<chrono::Utc> as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "user_id" => intermediate_rep.user_id.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "org_id" => intermediate_rep.org_id.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    _ => {
+                        return std::result::Result::Err(
+                            "Unexpected key while parsing Answer".to_string(),
+                        )
+                    }
                 }
             }
 
@@ -120,7 +135,11 @@ impl std::str::FromStr for Answer {
 
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(Answer {
-            question_id: intermediate_rep.question_id.into_iter().next().ok_or("questionId missing in Answer".to_string())?,
+            question_id: intermediate_rep
+                .question_id
+                .into_iter()
+                .next()
+                .ok_or("questionId missing in Answer".to_string())?,
             valid: intermediate_rep.valid.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
             user_id: intermediate_rep.user_id.into_iter().next(),
@@ -135,13 +154,16 @@ impl std::str::FromStr for Answer {
 impl std::convert::TryFrom<header::IntoHeaderValue<Answer>> for hyper::header::HeaderValue {
     type Error = String;
 
-    fn try_from(hdr_value: header::IntoHeaderValue<Answer>) -> std::result::Result<Self, Self::Error> {
+    fn try_from(
+        hdr_value: header::IntoHeaderValue<Answer>,
+    ) -> std::result::Result<Self, Self::Error> {
         let hdr_value = hdr_value.to_string();
         match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for Answer - value: {} is invalid {}",
-                     hdr_value, e))
+            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Invalid header value for Answer - value: {} is invalid {}",
+                hdr_value, e
+            )),
         }
     }
 }
@@ -152,35 +174,35 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
     fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
         match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <Answer as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into Answer - {}",
-                                value, err))
+            std::result::Result::Ok(value) => {
+                match <Answer as std::str::FromStr>::from_str(value) {
+                    std::result::Result::Ok(value) => {
+                        std::result::Result::Ok(header::IntoHeaderValue(value))
                     }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                    std::result::Result::Err(err) => std::result::Result::Err(format!(
+                        "Unable to convert header value '{}' into Answer - {}",
+                        value, err
+                    )),
+                }
+            }
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Unable to convert header: {:?} to string: {}",
+                hdr_value, e
+            )),
         }
     }
 }
-
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct Health {
     #[serde(rename = "status")]
     pub status: String,
-
 }
 
 impl Health {
-    pub fn new(status: String, ) -> Health {
-        Health {
-            status: status,
-        }
+    pub fn new(status: String) -> Health {
+        Health { status: status }
     }
 }
 
@@ -220,13 +242,24 @@ impl std::str::FromStr for Health {
         while key_result.is_some() {
             let val = match string_iter.next() {
                 Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing Health".to_string())
+                None => {
+                    return std::result::Result::Err(
+                        "Missing value while parsing Health".to_string(),
+                    )
+                }
             };
 
             if let Some(key) = key_result {
                 match key {
-                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing Health".to_string())
+                    "status" => intermediate_rep.status.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    _ => {
+                        return std::result::Result::Err(
+                            "Unexpected key while parsing Health".to_string(),
+                        )
+                    }
                 }
             }
 
@@ -236,7 +269,11 @@ impl std::str::FromStr for Health {
 
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(Health {
-            status: intermediate_rep.status.into_iter().next().ok_or("status missing in Health".to_string())?,
+            status: intermediate_rep
+                .status
+                .into_iter()
+                .next()
+                .ok_or("status missing in Health".to_string())?,
         })
     }
 }
@@ -247,13 +284,16 @@ impl std::str::FromStr for Health {
 impl std::convert::TryFrom<header::IntoHeaderValue<Health>> for hyper::header::HeaderValue {
     type Error = String;
 
-    fn try_from(hdr_value: header::IntoHeaderValue<Health>) -> std::result::Result<Self, Self::Error> {
+    fn try_from(
+        hdr_value: header::IntoHeaderValue<Health>,
+    ) -> std::result::Result<Self, Self::Error> {
         let hdr_value = hdr_value.to_string();
         match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for Health - value: {} is invalid {}",
-                     hdr_value, e))
+            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Invalid header value for Health - value: {} is invalid {}",
+                hdr_value, e
+            )),
         }
     }
 }
@@ -264,21 +304,24 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
     fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
         match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <Health as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into Health - {}",
-                                value, err))
+            std::result::Result::Ok(value) => {
+                match <Health as std::str::FromStr>::from_str(value) {
+                    std::result::Result::Ok(value) => {
+                        std::result::Result::Ok(header::IntoHeaderValue(value))
                     }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                    std::result::Result::Err(err) => std::result::Result::Err(format!(
+                        "Unable to convert header value '{}' into Health - {}",
+                        value, err
+                    )),
+                }
+            }
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Unable to convert header: {:?} to string: {}",
+                hdr_value, e
+            )),
         }
     }
 }
-
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -290,7 +333,7 @@ pub struct Question {
     pub tag: String,
 
     #[serde(rename = "number")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub number: Option<i64>,
 
     #[serde(rename = "question")]
@@ -306,28 +349,35 @@ pub struct Question {
     pub point_reward: i64,
 
     #[serde(rename = "tags")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tags: Option<Vec<String>>,
 
     #[serde(rename = "hint")]
     pub hint: String,
 
     #[serde(rename = "reference")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reference: Option<Vec<String>>,
 
     #[serde(rename = "correct_response")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub correct_response: Option<String>,
 
     #[serde(rename = "wrong_response")]
-    #[serde(skip_serializing_if="Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub wrong_response: Option<String>,
-
 }
 
 impl Question {
-    pub fn new(level: String, tag: String, question: String, correct_answer: i64, answers: Vec<String>, point_reward: i64, hint: String, ) -> Question {
+    pub fn new(
+        level: String,
+        tag: String,
+        question: String,
+        correct_answer: i64,
+        answers: Vec<String>,
+        point_reward: i64,
+        hint: String,
+    ) -> Question {
         Question {
             level: level,
             tag: tag,
@@ -355,54 +405,63 @@ impl std::string::ToString for Question {
         params.push("level".to_string());
         params.push(self.level.to_string());
 
-
         params.push("tag".to_string());
         params.push(self.tag.to_string());
-
 
         if let Some(ref number) = self.number {
             params.push("number".to_string());
             params.push(number.to_string());
         }
 
-
         params.push("question".to_string());
         params.push(self.question.to_string());
-
 
         params.push("correct_answer".to_string());
         params.push(self.correct_answer.to_string());
 
-
         params.push("answers".to_string());
-        params.push(self.answers.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",").to_string());
-
+        params.push(
+            self.answers
+                .iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+                .join(",")
+                .to_string(),
+        );
 
         params.push("point_reward".to_string());
         params.push(self.point_reward.to_string());
 
-
         if let Some(ref tags) = self.tags {
             params.push("tags".to_string());
-            params.push(tags.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",").to_string());
+            params.push(
+                tags.iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+                    .join(",")
+                    .to_string(),
+            );
         }
-
 
         params.push("hint".to_string());
         params.push(self.hint.to_string());
 
-
         if let Some(ref reference) = self.reference {
             params.push("reference".to_string());
-            params.push(reference.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(",").to_string());
+            params.push(
+                reference
+                    .iter()
+                    .map(|x| x.to_string())
+                    .collect::<Vec<_>>()
+                    .join(",")
+                    .to_string(),
+            );
         }
-
 
         if let Some(ref correct_response) = self.correct_response {
             params.push("correct_response".to_string());
             params.push(correct_response.to_string());
         }
-
 
         if let Some(ref wrong_response) = self.wrong_response {
             params.push("wrong_response".to_string());
@@ -446,24 +505,71 @@ impl std::str::FromStr for Question {
         while key_result.is_some() {
             let val = match string_iter.next() {
                 Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing Question".to_string())
+                None => {
+                    return std::result::Result::Err(
+                        "Missing value while parsing Question".to_string(),
+                    )
+                }
             };
 
             if let Some(key) = key_result {
                 match key {
-                    "level" => intermediate_rep.level.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "tag" => intermediate_rep.tag.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "number" => intermediate_rep.number.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "question" => intermediate_rep.question.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "correct_answer" => intermediate_rep.correct_answer.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "answers" => return std::result::Result::Err("Parsing a container in this style is not supported in Question".to_string()),
-                    "point_reward" => intermediate_rep.point_reward.push(<i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "tags" => return std::result::Result::Err("Parsing a container in this style is not supported in Question".to_string()),
-                    "hint" => intermediate_rep.hint.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "reference" => return std::result::Result::Err("Parsing a container in this style is not supported in Question".to_string()),
-                    "correct_response" => intermediate_rep.correct_response.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    "wrong_response" => intermediate_rep.wrong_response.push(<String as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing Question".to_string())
+                    "level" => intermediate_rep.level.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "tag" => intermediate_rep.tag.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "number" => intermediate_rep.number.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "question" => intermediate_rep.question.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "correct_answer" => intermediate_rep.correct_answer.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "answers" => {
+                        return std::result::Result::Err(
+                            "Parsing a container in this style is not supported in Question"
+                                .to_string(),
+                        )
+                    }
+                    "point_reward" => intermediate_rep.point_reward.push(
+                        <i64 as std::str::FromStr>::from_str(val).map_err(|x| format!("{}", x))?,
+                    ),
+                    "tags" => {
+                        return std::result::Result::Err(
+                            "Parsing a container in this style is not supported in Question"
+                                .to_string(),
+                        )
+                    }
+                    "hint" => intermediate_rep.hint.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "reference" => {
+                        return std::result::Result::Err(
+                            "Parsing a container in this style is not supported in Question"
+                                .to_string(),
+                        )
+                    }
+                    "correct_response" => intermediate_rep.correct_response.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    "wrong_response" => intermediate_rep.wrong_response.push(
+                        <String as std::str::FromStr>::from_str(val)
+                            .map_err(|x| format!("{}", x))?,
+                    ),
+                    _ => {
+                        return std::result::Result::Err(
+                            "Unexpected key while parsing Question".to_string(),
+                        )
+                    }
                 }
             }
 
@@ -473,15 +579,43 @@ impl std::str::FromStr for Question {
 
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(Question {
-            level: intermediate_rep.level.into_iter().next().ok_or("level missing in Question".to_string())?,
-            tag: intermediate_rep.tag.into_iter().next().ok_or("tag missing in Question".to_string())?,
+            level: intermediate_rep
+                .level
+                .into_iter()
+                .next()
+                .ok_or("level missing in Question".to_string())?,
+            tag: intermediate_rep
+                .tag
+                .into_iter()
+                .next()
+                .ok_or("tag missing in Question".to_string())?,
             number: intermediate_rep.number.into_iter().next(),
-            question: intermediate_rep.question.into_iter().next().ok_or("question missing in Question".to_string())?,
-            correct_answer: intermediate_rep.correct_answer.into_iter().next().ok_or("correct_answer missing in Question".to_string())?,
-            answers: intermediate_rep.answers.into_iter().next().ok_or("answers missing in Question".to_string())?,
-            point_reward: intermediate_rep.point_reward.into_iter().next().ok_or("point_reward missing in Question".to_string())?,
+            question: intermediate_rep
+                .question
+                .into_iter()
+                .next()
+                .ok_or("question missing in Question".to_string())?,
+            correct_answer: intermediate_rep
+                .correct_answer
+                .into_iter()
+                .next()
+                .ok_or("correct_answer missing in Question".to_string())?,
+            answers: intermediate_rep
+                .answers
+                .into_iter()
+                .next()
+                .ok_or("answers missing in Question".to_string())?,
+            point_reward: intermediate_rep
+                .point_reward
+                .into_iter()
+                .next()
+                .ok_or("point_reward missing in Question".to_string())?,
             tags: intermediate_rep.tags.into_iter().next(),
-            hint: intermediate_rep.hint.into_iter().next().ok_or("hint missing in Question".to_string())?,
+            hint: intermediate_rep
+                .hint
+                .into_iter()
+                .next()
+                .ok_or("hint missing in Question".to_string())?,
             reference: intermediate_rep.reference.into_iter().next(),
             correct_response: intermediate_rep.correct_response.into_iter().next(),
             wrong_response: intermediate_rep.wrong_response.into_iter().next(),
@@ -495,13 +629,16 @@ impl std::str::FromStr for Question {
 impl std::convert::TryFrom<header::IntoHeaderValue<Question>> for hyper::header::HeaderValue {
     type Error = String;
 
-    fn try_from(hdr_value: header::IntoHeaderValue<Question>) -> std::result::Result<Self, Self::Error> {
+    fn try_from(
+        hdr_value: header::IntoHeaderValue<Question>,
+    ) -> std::result::Result<Self, Self::Error> {
         let hdr_value = hdr_value.to_string();
         match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for Question - value: {} is invalid {}",
-                     hdr_value, e))
+            std::result::Result::Ok(value) => std::result::Result::Ok(value),
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Invalid header value for Question - value: {} is invalid {}",
+                hdr_value, e
+            )),
         }
     }
 }
@@ -512,18 +649,21 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
     fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
         match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <Question as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into Question - {}",
-                                value, err))
+            std::result::Result::Ok(value) => {
+                match <Question as std::str::FromStr>::from_str(value) {
+                    std::result::Result::Ok(value) => {
+                        std::result::Result::Ok(header::IntoHeaderValue(value))
                     }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
+                    std::result::Result::Err(err) => std::result::Result::Err(format!(
+                        "Unable to convert header value '{}' into Question - {}",
+                        value, err
+                    )),
+                }
+            }
+            std::result::Result::Err(e) => std::result::Result::Err(format!(
+                "Unable to convert header: {:?} to string: {}",
+                hdr_value, e
+            )),
         }
     }
 }
-

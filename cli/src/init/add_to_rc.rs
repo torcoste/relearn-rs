@@ -11,8 +11,12 @@ fn add_to_terminal_startup(rc_file_path: &str) {
             rc_file_path
         ))
         .output()
-        .unwrap_or_else(|_| panic!("Failed to check if rlrn is already added to terminal startup script ({})",
-                rc_file_path));
+        .unwrap_or_else(|_| {
+            panic!(
+                "Failed to check if rlrn is already added to terminal startup script ({})",
+                rc_file_path
+            )
+        });
     let output = String::from_utf8(output.stdout).unwrap();
     let is_already_added = output.trim() == "true";
 
@@ -21,8 +25,12 @@ fn add_to_terminal_startup(rc_file_path: &str) {
             .arg("-c")
             .arg(format!("echo '{}' >> {} ", startup_command, rc_file_path))
             .output()
-            .unwrap_or_else(|_| panic!("Failed to add rlrn to terminal startup script ({})",
-                    rc_file_path));
+            .unwrap_or_else(|_| {
+                panic!(
+                    "Failed to add rlrn to terminal startup script ({})",
+                    rc_file_path
+                )
+            });
     }
 }
 
@@ -30,10 +38,17 @@ fn add_to_terminal_startup(rc_file_path: &str) {
 fn _remove_from_terminal_startup(rc_file_name: &str) {
     Command::new("sh")
         .arg("-c")
-        .arg(format!("sed -i '/command -v rlrn/,+2d' ~/{} ", rc_file_name))
+        .arg(format!(
+            "sed -i '/command -v rlrn/,+2d' ~/{} ",
+            rc_file_name
+        ))
         .output()
-        .unwrap_or_else(|_| panic!("Failed to remove from terminal startup script ({})",
-                rc_file_name));
+        .unwrap_or_else(|_| {
+            panic!(
+                "Failed to remove from terminal startup script ({})",
+                rc_file_name
+            )
+        });
 }
 
 fn check_if_file_exist(file_path: &str) -> bool {
@@ -45,7 +60,7 @@ fn check_if_file_exist(file_path: &str) -> bool {
 
     let output = String::from_utf8(output.stdout).unwrap();
 
-    return output.trim() == "1"
+    return output.trim() == "1";
 }
 
 /// add rlrn to terminal startup scripts

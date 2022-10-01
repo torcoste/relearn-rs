@@ -1,14 +1,14 @@
+use crate::Api;
 use futures::future::BoxFuture;
 use hyper::header::HeaderName;
-use hyper::{Error, Request, Response, StatusCode, service::Service};
-use url::form_urlencoded;
+use hyper::{service::Service, Error, Request, Response, StatusCode};
 use std::default::Default;
 use std::io;
 use std::marker::PhantomData;
-use std::task::{Poll, Context};
+use std::task::{Context, Poll};
 use swagger::auth::{AuthData, Authorization, Bearer, Scopes};
 use swagger::{EmptyContext, Has, Pop, Push, XSpanIdString};
-use crate::Api;
+use url::form_urlencoded;
 
 pub struct MakeAddContext<T, A> {
     inner: T,
@@ -30,8 +30,7 @@ where
 }
 
 // Make a service that adds context.
-impl<Target, T, A, B, C, D> Service<Target> for
-    MakeAddContext<T, A>
+impl<Target, T, A, B, C, D> Service<Target> for MakeAddContext<T, A>
 where
     Target: Send,
     A: Default + Push<XSpanIdString, Result = B> + Send,
@@ -39,7 +38,7 @@ where
     C: Push<Option<Authorization>, Result = D>,
     D: Send + 'static,
     T: Service<Target> + Send,
-    T::Future: Send + 'static
+    T::Future: Send + 'static,
 {
     type Error = T::Error;
     type Response = AddContext<T::Response, A, B, C, D>;
@@ -52,9 +51,7 @@ where
     fn call(&mut self, target: Target) -> Self::Future {
         let service = self.inner.call(target);
 
-        Box::pin(async move {
-            Ok(AddContext::new(service.await?))
-        })
+        Box::pin(async move { Ok(AddContext::new(service.await?)) })
     }
 }
 
@@ -63,7 +60,7 @@ pub struct AddContext<T, A, B, C, D>
 where
     A: Default + Push<XSpanIdString, Result = B>,
     B: Push<Option<AuthData>, Result = C>,
-    C: Push<Option<Authorization>, Result = D>
+    C: Push<Option<Authorization>, Result = D>,
 {
     inner: T,
     marker: PhantomData<A>,
@@ -84,12 +81,12 @@ where
 }
 
 impl<T, A, B, C, D, ReqBody> Service<Request<ReqBody>> for AddContext<T, A, B, C, D>
-    where
-        A: Default + Push<XSpanIdString, Result=B>,
-        B: Push<Option<AuthData>, Result=C>,
-        C: Push<Option<Authorization>, Result=D>,
-        D: Send + 'static,
-        T: Service<(Request<ReqBody>, D)>
+where
+    A: Default + Push<XSpanIdString, Result = B>,
+    B: Push<Option<AuthData>, Result = C>,
+    C: Push<Option<Authorization>, Result = D>,
+    D: Send + 'static,
+    T: Service<(Request<ReqBody>, D)>,
 {
     type Error = T::Error;
     type Future = T::Future;
@@ -99,11 +96,9 @@ impl<T, A, B, C, D, ReqBody> Service<Request<ReqBody>> for AddContext<T, A, B, C
         self.inner.poll_ready(cx)
     }
 
-
     fn call(&mut self, request: Request<ReqBody>) -> Self::Future {
         let context = A::default().push(XSpanIdString::get_or_generate(&request));
         let headers = request.headers();
-
 
         let context = context.push(None::<AuthData>);
         let context = context.push(None::<Authorization>);
