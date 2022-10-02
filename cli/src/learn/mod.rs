@@ -78,7 +78,7 @@ pub fn learn_command_handler(force: bool) {
                     )
                 };
 
-                let content_reference_section = if reference.len() > 0 {
+                let content_reference_section = if !reference.is_empty() {
                     format!("\n\nYou can find more information at:\n{}", reference)
                 } else {
                     "".to_string()
