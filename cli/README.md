@@ -6,6 +6,7 @@
 [![MIT License][license-shield]][license-url]
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/torcoste/relearn-rs/main/images/logo.png" alt="rlrn logo" width="80">
   <h3 align="center">rlrn</h3>
   <p align="center">
     An awesome CLI tool for effectively learning Rust and more
