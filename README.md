@@ -5,17 +5,15 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/torcoste/relearn-rs/main/images/logo.png" alt="rlrn logo" width="80">
+<div align="center">
+  <a href="https://raw.githubusercontent.com/torcoste/relearn-rs">
+    <img src="https://raw.githubusercontent.com/torcoste/relearn-rs/main/images/logo.png" alt="rlrn logo" width="80" height="80">
+  </a>
   <h3 align="center">rlrn</h3>
   <p align="center">
     An awesome CLI tool for effectively learning Rust and more
   </p>
-</p>
-
-
-
-
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
