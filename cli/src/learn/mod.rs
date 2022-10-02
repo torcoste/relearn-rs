@@ -68,21 +68,26 @@ pub fn learn_command_handler(force: bool) {
                 let answered_correctly = index as i64 == question.correct_answer;
                 update_daily_progress(answered_correctly);
 
-                if answered_correctly {
-                    let mut dialog = Dialog::text("Correct!");
-                    (&mut dialog).clear_buttons();
-
-                    let dialog = add_buttons_to_dialog(dialog);
-                    s.add_layer(dialog);
+                let reference = question.reference[0].to_string();
+                let content_header = if answered_correctly {
+                    "Correct!".to_string()
                 } else {
-                    let reference = question.reference[0].to_string();
-                    let mut dialog = Dialog::info(format!("Wrong.\n\n{}", reference));
+                    format!(
+                        "Wrong!\nThe answer is {}.",
+                        vocabulary[question.correct_answer as usize]
+                    )
+                };
 
-                    (&mut dialog).clear_buttons();
+                let content_reference_section = if reference.len() > 0 {
+                    format!("\n\nYou can find more information at:\n{}", reference)
+                } else {
+                    "".to_string()
+                };
 
-                    let dialog = add_buttons_to_dialog(dialog);
-                    s.add_layer(dialog);
-                }
+                let content = format!("{}{}", content_header, content_reference_section);
+                let dialog = create_dialog(content);
+
+                s.add_layer(dialog);
             });
         }
 
@@ -99,7 +104,9 @@ pub fn learn_command_handler(force: bool) {
     }
 }
 
-fn add_buttons_to_dialog(dialog: Dialog) -> Dialog {
+fn create_dialog(content: String) -> Dialog {
+    let mut dialog = Dialog::text(content);
+    (&mut dialog).clear_buttons();
     dialog
         .dismiss_button("Back")
         .button("Next", |s| {
