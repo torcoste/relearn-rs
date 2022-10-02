@@ -12,7 +12,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -34,7 +35,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -56,7 +58,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -78,7 +81,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -100,7 +104,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -111,7 +116,7 @@
 	},
 	{
 		"no": 6,
-		"level": 1,
+		"level": 2,
 		"question": "The term box and related phrases such as boxing a value are often used when relating to memory layout. What does box refer to?",
 		"correct_answer": 1,
 		"answers": [
@@ -123,7 +128,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -134,7 +140,7 @@
 	},
 	{
 		"no": 7,
-		"level": 1,
+		"level": 2,
 		"question": "What is an alternative way of writing slice that produces the same result?\n\n...\nlet s = String::form(\"hello\");\nlet slice = &s[0..2];",
 		"correct_answer": 3,
 		"answers": [
@@ -145,7 +151,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -156,7 +164,7 @@
 	},
 	{
 		"no": 8,
-		"level": 1,
+		"level": 2,
 		"question": "Using the ? operator at the end of an expression is equivalent to _.",
 		"correct_answer": 3,
 		"answers": [
@@ -167,7 +175,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -189,7 +199,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -200,7 +212,7 @@
 	},
 	{
 		"no": 10,
-		"level": 1,
+		"level": 2,
 		"question": "What syntax is required to take a mutable reference to T, when used within a function argument?\n\nfn increment(i: T) {\n    // body elided\n}",
 		"correct_answer": 3,
 		"answers": [
@@ -211,7 +223,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -222,7 +236,7 @@
 	},
 	{
 		"no": 11,
-		"level": 1,
+		"level": 2,
 		"question": "The smart pointers Rc and Arc provide reference counting. What is the API for incrementing a reference count?",
 		"correct_answer": 2,
 		"answers": [
@@ -233,7 +247,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -244,7 +260,7 @@
 	},
 	{
 		"no": 12,
-		"level": 1,
+		"level": 2,
 		"question": "What happens when an error occurs that is being handled by the question mark (?) operator?",
 		"correct_answer": 2,
 		"answers": [
@@ -255,7 +271,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -277,7 +295,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -299,7 +319,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -310,7 +332,7 @@
 	},
 	{
 		"no": 15,
-		"level": 1,
+		"level": 2,
 		"question": "Defining a _ requires a lifetime parameter.",
 		"correct_answer": 1,
 		"answers": [
@@ -321,7 +343,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -332,7 +356,7 @@
 	},
 	{
 		"no": 16,
-		"level": 1,
+		"level": 2,
 		"question": "Which example correctly uses std::collections::HashMap's Entry API to populate counts?\n\nuse std::collections::HashMap;\nfn main() {\n    let mut counts = HashMap::new();\n    let text = \"LinkedIn Learning\";\n    for c in text.chars() {\n        // Complete this block\n    }\n    println!(\"{:?}\", counts);\n}",
 		"correct_answer": 1,
 		"answers": [
@@ -343,7 +367,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -354,7 +380,7 @@
 	},
 	{
 		"no": 17,
-		"level": 1,
+		"level": 3,
 		"question": "Which fragment does not incur memory allocations while writing to a \"file\" (represented by a Vec)?\n\nuse std::collections::HashMap;\n\nfn main() -> Result<(), Box<dyn std::error::Error>> {\n    let mut v = Vec::<u8>::new();\n\n    let a = \"LinkedIn\";\n    let b = 123;\n    let c = '🧀';\n\n    // replace this line\n\n    println!(\"{:?}\", v);\n\n    Ok(())\n}",
 		"correct_answer": 0,
 		"answers": [
@@ -365,7 +391,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -377,7 +405,7 @@
 	},
 	{
 		"no": 18,
-		"level": 1,
+		"level": 3,
 		"question": "Does the main function compile? If so, why? If not, what do you need to change?\n\nfn main() {\n    let Some(x) = some_option_value;\n}",
 		"correct_answer": 2,
 		"answers": [
@@ -388,7 +416,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -399,7 +429,7 @@
 	},
 	{
 		"no": 19,
-		"level": 1,
+		"level": 3,
 		"question": "Which statement about lifetimes is false?",
 		"correct_answer": 3,
 		"answers": [
@@ -410,7 +440,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -421,7 +453,7 @@
 	},
 	{
 		"no": 20,
-		"level": 1,
+		"level": 2,
 		"question": "When used as a return type, which Rust type plays a similar role to Python's None, JavaScript's null, or the void type in C/C++?",
 		"correct_answer": 3,
 		"answers": [
@@ -432,7 +464,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -443,7 +477,7 @@
 	},
 	{
 		"no": 21,
-		"level": 1,
+		"level": 2,
 		"question": "To convert a Result to an Option, which method should you use?",
 		"correct_answer": 2,
 		"answers": [
@@ -454,7 +488,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -465,7 +501,7 @@
 	},
 	{
 		"no": 22,
-		"level": 1,
+		"level": 2,
 		"question": "Which statement about the Clone and Copy traits is false?",
 		"correct_answer": 0,
 		"answers": [
@@ -476,7 +512,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -487,7 +525,7 @@
 	},
 	{
 		"no": 23,
-		"level": 1,
+		"level": 3,
 		"question": "Why does this code not compile?\n\nfn returns_closure() -> dyn Fn(i32) -> i32 {\n    |x| x + 1\n}",
 		"correct_answer": 3,
 		"answers": [
@@ -498,7 +536,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -509,7 +549,7 @@
 	},
 	{
 		"no": 24,
-		"level": 0,
+		"level": 3,
 		"question": "What smart pointer is used to allow multiple ownership of a value in various threads?",
 		"correct_answer": 2,
 		"answers": [
@@ -520,7 +560,8 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science"
 		],
 		"hint": "",
 		"reference": [
@@ -542,7 +583,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
@@ -564,7 +607,9 @@
 		],
 		"point_reward": 5,
 		"tags": [
-			""
+			"backend",
+			"data-science",
+			"frontend"
 		],
 		"hint": "",
 		"reference": [
