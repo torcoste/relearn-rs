@@ -15,6 +15,20 @@ fn get_reminder_interval_text(value: i32) -> String {
     format!("Reminder interval: {} hours", value)
 }
 
+fn get_question_tag_text(value: &str) -> String {
+    format!("Question tag: {}", value)
+}
+
+fn get_question_level_text(value: i32) -> String {
+    let level = match value {
+        1 => "Junior",
+        2 => "Middle",
+        3 => "Senior",
+        _ => "Unknown",
+    };
+    format!("Question level: {}", level)
+}
+
 pub fn init_command_handler() {
     let config = load_config().expect("Failed to load config");
 
@@ -55,10 +69,48 @@ pub fn init_command_handler() {
                 v.set_content(get_reminder_interval_text(*value));
             });
 
-            s.focus_name("ok_button").unwrap();
+            s.focus_name("question_tag_select").unwrap();
         });
     }
     let reminder_interval_select = reminder_interval_select.with_name("reminder_interval_select");
+
+    let mut question_tag_select = SelectView::new()
+        .item("(all)", ".".to_string())
+        .item("Backend", "backend".to_string())
+        .item("Frontend", "frontend".to_string())
+        .item("Data science", "data-science".to_string());
+    {
+        let output_config_rc = output_config_rc.clone();
+        question_tag_select.set_on_submit(move |s, value: &String| {
+            let mut output_config = output_config_rc.borrow_mut();
+            output_config.question_tag = value.to_string();
+
+            s.call_on_name("question_tag_text", |v: &mut TextView| {
+                v.set_content(get_question_tag_text(value));
+            });
+
+            s.focus_name("question_level_select").unwrap();
+        });
+    }
+
+    let mut question_level_select = SelectView::new()
+        .item("Junior", 1)
+        .item("Middle", 2)
+        .item("Senior", 3);
+
+    {
+        let output_config_rc = output_config_rc.clone();
+        question_level_select.set_on_submit(move |s, value| {
+            let mut output_config = output_config_rc.borrow_mut();
+            output_config.question_level = *value;
+
+            s.call_on_name("question_level_text", |v: &mut TextView| {
+                v.set_content(get_question_level_text(*value));
+            });
+
+            s.focus_name("ok_button").unwrap();
+        });
+    }
 
     let layout = {
         LinearLayout::vertical()
@@ -80,6 +132,24 @@ pub fn init_command_handler() {
                 .with_name("reminder_interval_text"),
             )
             .child(reminder_interval_select)
+            // Question tag
+            .child(
+                TextView::new(get_question_tag_text(
+                    output_config_rc.clone().borrow().question_tag.as_str(),
+                ))
+                .h_align(HAlign::Center)
+                .with_name("question_tag_text"),
+            )
+            .child(question_tag_select.with_name("question_tag_select"))
+            // Question level
+            .child(
+                TextView::new(get_question_level_text(
+                    output_config_rc.clone().borrow().question_level,
+                ))
+                .h_align(HAlign::Center)
+                .with_name("question_level_text"),
+            )
+            .child(question_level_select.with_name("question_level_select"))
             // Submit button
             .child(
                 Button::new("Ok", move |s| {

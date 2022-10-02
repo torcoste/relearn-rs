@@ -4,6 +4,8 @@ use serde::{Deserialize, Serialize};
 pub struct UserConfig {
     pub daily_goal: i32,
     pub reminder_interval: i32,
+    pub question_tag: String,
+    pub question_level: i32,
 }
 
 impl ::std::default::Default for UserConfig {
@@ -11,6 +13,8 @@ impl ::std::default::Default for UserConfig {
         Self {
             daily_goal: 5,
             reminder_interval: 1,
+            question_tag: "backend".to_string(),
+            question_level: 1,
         }
     }
 }

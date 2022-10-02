@@ -69,7 +69,7 @@ fn check_if_file_exist(file_path: &str) -> bool {
 }
 
 /// Add `rlrn` to terminal startup scripts (e.g. .bashrc, .zshrc)
-/// 
+///
 /// Node: It will not add if it is already added
 pub fn add_rlrn_to_existing_rc_files_if_required() {
     let supported_rc_files = vec![".bashrc", ".zshrc"];
