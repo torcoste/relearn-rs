@@ -1,7 +1,7 @@
 use cursive::align::HAlign;
 use cursive::traits::*;
 use cursive::views::{Dialog, TextView};
-use rand::Rng; // 0.8.5
+use rand::Rng;
 use serde::{Deserialize, Serialize};
 
 use crate::configs::daily_progress_config::{
