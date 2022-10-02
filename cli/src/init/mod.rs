@@ -41,6 +41,7 @@ pub fn init_command_handler() {
     }
 
     let mut reminder_interval_select = SelectView::new();
+    reminder_interval_select.add_item("(each terminal session)", 0);
     reminder_interval_select.add_item("1 hour", 1);
     reminder_interval_select.add_item("2 hours", 2);
     reminder_interval_select.add_item("3 hours", 3);
