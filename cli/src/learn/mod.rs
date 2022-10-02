@@ -8,7 +8,7 @@ use crate::configs::daily_progress_config::{
     do_i_need_to_answer_question_now, update_daily_progress,
 };
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     pub no: i64,
@@ -106,7 +106,7 @@ pub fn learn_command_handler(force: bool) {
 
 fn create_dialog(content: String) -> Dialog {
     let mut dialog = Dialog::text(content);
-    (&mut dialog).clear_buttons();
+    dialog.clear_buttons();
     dialog
         .dismiss_button("Back")
         .button("Next", |s| {

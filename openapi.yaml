@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: Swagger Petstore
+  title: My API
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
@@ -9,7 +9,7 @@ info:
     name: Swagger API Team
     url: https://swagger.io
     email: m@m.com
-  description: "This is a sample Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters."
+  description: "relearn"
 
 tags:
   - name: relern
