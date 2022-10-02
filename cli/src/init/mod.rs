@@ -19,7 +19,7 @@ fn get_question_tag_text(value: &str) -> String {
     format!("Question tag: {}", value)
 }
 
-fn get_question_level_text(value: i32) -> String {
+fn get_question_level_text(value: i64) -> String {
     let level = match value {
         1 => "Junior",
         2 => "Middle",

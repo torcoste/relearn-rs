@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::configs::daily_progress_config::{
     do_i_need_to_answer_question_now, update_daily_progress,
 };
+use crate::configs::user_config::load_config;
 
 #[derive(Default, Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -40,6 +41,26 @@ pub fn learn_command_handler(force: bool) {
         // (We include the file at compile-time to avoid runtime read errors.)
         let json_content = include_str!("assets/questions.json");
         let questions: Vec<Question> = serde_json::from_str(json_content).unwrap();
+        let filtered_level = load_config().unwrap().question_level;
+        let filtered_tag = load_config().unwrap().question_tag;
+        // filter questions by level
+        let questions: Vec<Question> = questions
+            .into_iter()
+            .filter(|q| q.level == filtered_level)
+            .collect();
+
+        // filter questions by tag
+        println!("filtered_tag: {}", filtered_tag);
+        println!("questions: {:?}", questions.len());
+        let questions = if filtered_tag != "." {
+            questions
+                .into_iter()
+                .filter(|q| q.tags.contains(&filtered_tag))
+                .collect()
+        } else {
+            questions
+        };
+        println!("questions: {:?}", questions.len());
 
         let random_number = rand::thread_rng().gen_range(0..questions.len());
         let random_question = questions[random_number].clone();
