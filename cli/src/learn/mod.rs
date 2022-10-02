@@ -1,5 +1,5 @@
 use cursive::align::HAlign;
-use cursive::traits::*;
+use cursive::view::Scrollable;
 use cursive::views::{Dialog, TextView};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
