@@ -50,8 +50,6 @@ pub fn learn_command_handler(force: bool) {
             .collect();
 
         // filter questions by tag
-        println!("filtered_tag: {}", filtered_tag);
-        println!("questions: {:?}", questions.len());
         let questions = if filtered_tag != "." {
             questions
                 .into_iter()
@@ -60,7 +58,6 @@ pub fn learn_command_handler(force: bool) {
         } else {
             questions
         };
-        println!("questions: {:?}", questions.len());
 
         let random_number = rand::thread_rng().gen_range(0..questions.len());
         let random_question = questions[random_number].clone();
