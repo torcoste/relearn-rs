@@ -5,7 +5,7 @@ pub struct UserConfig {
     pub daily_goal: i32,
     pub reminder_interval: i32,
     pub question_tag: String,
-    pub question_level: i32,
+    pub question_level: i64,
 }
 
 impl ::std::default::Default for UserConfig {
@@ -22,6 +22,7 @@ impl ::std::default::Default for UserConfig {
 pub fn load_config() -> Result<UserConfig, confy::ConfyError> {
     let config: UserConfig = confy::load("rlrn", Some("user_config"))?;
 
+    // let path = confy::get_configuration_file_path("rlrn", Some("user_config"))?;
     Ok(config)
 }
 
