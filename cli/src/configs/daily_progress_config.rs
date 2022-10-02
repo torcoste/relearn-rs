@@ -24,7 +24,19 @@ pub fn reset_config() -> Result<(), confy::ConfyError> {
 
     let path = path.to_str().expect("Failed to convert path to string");
 
-    std::fs::remove_file(path).expect("Failed to remove file");
+    std::fs::remove_file(path)
+        .or_else(|error| -> Result<(), std::io::Error> {
+            match error.kind() {
+                std::io::ErrorKind::NotFound => {
+                    // file not found, so it's already reset
+                    return Ok(());
+                }
+                _ => {
+                    return Err(error);
+                }
+            }
+        })
+        .expect("Failed to remove file");
 
     Ok(())
 }
