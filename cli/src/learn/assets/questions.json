@@ -7,7 +7,7 @@
 		"answers": [
 			"i64 as i32",
 			"usize as u64",
-			"usize as u64",
+			"i32 as i64",
 			"f64 as f32"
 		],
 		"point_reward": 5,
