@@ -1,9 +1,6 @@
 use std::process::Command;
 
-fn add_to_terminal_startup(rc_file_path: &str) {
-    let startup_command = "if [ -x \"$(command -v rlrn)\" ]; then\n  rlrn learn\nfi\n";
-
-    // check if command is already in rc file
+fn check_if_added_to_terminal_startup(rc_file_path: &str) -> bool {
     let output = Command::new("sh")
         .arg("-c")
         .arg(format!(
@@ -19,6 +16,14 @@ fn add_to_terminal_startup(rc_file_path: &str) {
         });
     let output = String::from_utf8(output.stdout).unwrap();
     let is_already_added = output.trim() == "true";
+
+    is_already_added
+}
+
+fn add_to_terminal_startup(rc_file_path: &str) {
+    let startup_command = "if [ -x \"$(command -v rlrn)\" ]; then\n  rlrn learn\nfi\n";
+
+    let is_already_added = check_if_added_to_terminal_startup(rc_file_path);
 
     if !is_already_added {
         Command::new("sh")
@@ -63,10 +68,10 @@ fn check_if_file_exist(file_path: &str) -> bool {
     return output.trim() == "1";
 }
 
-/// add rlrn to terminal startup scripts
-/// (e.g. .bashrc, .zshrc)
-/// it will not add if it is already added
-pub fn add_rlrn_to_existing_rc_files() {
+/// Add `rlrn` to terminal startup scripts (e.g. .bashrc, .zshrc)
+/// 
+/// Node: It will not add if it is already added
+pub fn add_rlrn_to_existing_rc_files_if_required() {
     let supported_rc_files = vec![".bashrc", ".zshrc"];
 
     for rc_file in supported_rc_files {

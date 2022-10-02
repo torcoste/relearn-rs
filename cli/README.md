@@ -64,7 +64,7 @@ ReLeaRN is built with Rust end-to-end, and uses Open Source Rust libraries to cr
    ```sh
    cargo install rlrn
    ```
-2. Initialize app to see quiz when you open new terminal
+2. Initialize app
    ```sh
    rlrn init
    ```

@@ -1,6 +1,5 @@
-mod add_to_rc;
+pub mod add_to_rc;
 use crate::configs::user_config::{load_config, set_config};
-use add_to_rc::add_rlrn_to_existing_rc_files;
 use cursive::{
     align::HAlign,
     view::{Nameable, Resizable, Scrollable},
@@ -17,8 +16,6 @@ fn get_reminder_interval_text(value: i32) -> String {
 }
 
 pub fn init_command_handler() {
-    add_rlrn_to_existing_rc_files();
-
     let config = load_config().expect("Failed to load config");
 
     let output_config_rc = Rc::new(RefCell::new(config));

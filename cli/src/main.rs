@@ -3,7 +3,7 @@ use clap::{Parser, Subcommand};
 mod configs;
 
 mod init;
-use init::init_command_handler;
+use init::{add_to_rc::add_rlrn_to_existing_rc_files_if_required, init_command_handler};
 
 mod learn;
 use learn::learn_command_handler;
@@ -20,7 +20,7 @@ struct Cli {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    /// Initialize application (create config file, set autorun)
+    /// Initialize application and setup configs
     Init {},
     /// Request quiz question
     Learn {
@@ -31,9 +31,9 @@ enum Commands {
 }
 
 fn main() {
-    let cli = Cli::parse();
+    add_rlrn_to_existing_rc_files_if_required();
 
-    // TODO: if it is a first run, run init command automatically before any other command
+    let cli = Cli::parse();
 
     match &cli.command {
         Some(Commands::Init {}) => {
