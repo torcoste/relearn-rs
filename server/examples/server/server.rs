@@ -32,7 +32,7 @@ pub async fn create(addr: &str, https: bool) {
 
     let service = MakeAllowAllAuthenticator::new(service, "cosmo");
 
-    let service = relearnserver::server::context::MakeAddContext::<_, EmptyContext>::new(service);
+    let mut service = relearnserver::server::context::MakeAddContext::<_, EmptyContext>::new(service);
 
     if https {
         #[cfg(any(target_os = "macos", target_os = "windows", target_os = "ios"))]
