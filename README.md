@@ -6,7 +6,7 @@
 [![MIT License][license-shield]][license-url]
 
 <div align="center">
-  <a href="https://raw.githubusercontent.com/torcoste/relearn-rs">
+  <a href="https://github.com/torcoste/relearn-rs">
     <img src="https://raw.githubusercontent.com/torcoste/relearn-rs/main/images/logo.png" alt="rlrn logo" width="80" height="80">
   </a>
   <h3 align="center">rlrn</h3>
